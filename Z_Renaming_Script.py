@@ -18,7 +18,7 @@ def rename_HR_files(files):
             print(f"Renamed: {filename} -> {new_name}")
 
 rename_HR_files(files)
-# /////////////////////////////////////////
+# # /////////////////////////////////////////
 import os
 
 LC_SQL_PREFIX = "LC - SQL"
@@ -42,3 +42,28 @@ def rename_sql_files(files):
             print(f"Renamed: {filename} -> {final_name}")
 
 rename_sql_files(files)
+
+# ////////////////////////////
+
+import os
+
+files = os.listdir()
+
+def correct_file_extension(files):
+    for filename in files:
+        if os.path.isdir(filename):
+            continue
+        
+        file_name, file_extension = os.path.splitext(filename)
+        
+        if file_extension == ".py":
+            clean_name = file_name.strip().replace(" ", "_").replace("--", "-")
+            clean_name = clean_name.replace('.py', '')  
+            clean_name = clean_name.rstrip('.') 
+
+            final_name = f"{clean_name}.py" 
+            os.rename(filename, final_name)
+            print(f"Renamed: {filename} -> {final_name}")
+
+correct_file_extension(files)
+
