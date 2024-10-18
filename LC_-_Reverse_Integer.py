@@ -1,16 +1,14 @@
-def reverse(self, x: int) -> int:
-    minimum = -2147483648
-    maximum = 2147483647
+def reverse(self, x):
+        INT_MIN, INT_MAX = -2**31, 2**31 - 1
+        result = 0
+        sign = -1 if x < 0 else 1
+        x = abs(x)
+        
+        while x != 0:
+            pop = x % 10
+            x //= 10
+            if result > (INT_MAX - pop) // 10:
+                return 0
+            result = result * 10 + pop
 
-    result = 0
-    while x:
-        digit = int(math.fmod(x, 10))
-        x = int(x / 10)
-
-        if result > maximum // 10 or (result == maximum // 10 and digit > maximum % 10):
-            return 0
-        if result < minimum // 10 or (result == minimum // 10 and digit < minimum % 10):
-            return 0
-        result = (result * 10) + digit
-
-    return result
+        return sign * result
